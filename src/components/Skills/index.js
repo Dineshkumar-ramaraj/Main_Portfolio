@@ -16,7 +16,7 @@ const frontEndSkills = [
     name: "CSS",
     progress: "85",
     iconElement: (
-      <i class="fa-brands fa-css3-alt text-[50px] text-blue-600"></i>
+      <i className="fa-brands fa-css3-alt text-[50px] text-blue-600"></i>
     ),
     type: "icon",
   },

@@ -26,9 +26,10 @@ const About = () => {
             As a fresher, I am eager to bring my skills into a professional
             environment, collaborate with experienced developers, and
             continuously learn to create impactful web experiences. I have
-            worked on projects such as [mention a key project, e.g., a stock
-            market app or booking system], which have strengthened my
-            problem-solving skills and ability to work with real-time data.
+            worked on projects such as a movie browsing app, a quiz timer
+            application, and clones of popular platforms like Netflix,
+            YouTube, and Wikipedia, which have strengthened my problem-solving
+            skills and ability to work with real-time data.
           </span>
           {/* <span className="text-slate-200 text-justify first-letter:pl-10">
           I am excited to start my journey in the world of web development and
