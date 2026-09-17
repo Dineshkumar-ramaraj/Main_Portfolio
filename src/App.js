@@ -8,6 +8,7 @@ import Skills from "./components/Skills";
 import Contact from "./components/Contact";
 import About from "./components/About";
 import Footer from "./components/Footer";
+import { ThemeProvider, useTheme } from "./context/ThemeContext";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -19,9 +20,21 @@ function ScrollToTop() {
   return null;
 }
 
-function App() {
+function MainLayout() {
+  const { theme } = useTheme();
+
   return (
-    <div className="min-h-screen flex flex-col bg-[#080C14] text-slate-200 bg-ambient-radial selection:bg-cyan-500/30 selection:text-cyan-200">
+    <div
+      className="min-h-screen flex flex-col text-slate-200 transition-colors duration-500"
+      style={{
+        backgroundColor: theme.bgColor,
+        backgroundImage: `
+          radial-gradient(circle at 15% 20%, ${theme.glow1} 0%, transparent 45%),
+          radial-gradient(circle at 85% 60%, ${theme.glow2} 0%, transparent 45%),
+          radial-gradient(circle at 50% 90%, ${theme.glow1} 0%, transparent 50%)
+        `,
+      }}
+    >
       <ScrollToTop />
       <Toaster
         position="top-right"
@@ -36,7 +49,7 @@ function App() {
           },
           success: {
             iconTheme: {
-              primary: "#38BDF8",
+              primary: theme.primary,
               secondary: "#0F172A",
             },
           },
@@ -54,6 +67,14 @@ function App() {
       </main>
       <Footer />
     </div>
+  );
+}
+
+function App() {
+  return (
+    <ThemeProvider>
+      <MainLayout />
+    </ThemeProvider>
   );
 }
 

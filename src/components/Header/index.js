@@ -2,8 +2,12 @@ import React from "react";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { NavLink, Link } from "react-router-dom";
 import { FiSend } from "react-icons/fi";
+import ThemeSelector from "../ThemeSelector";
+import { useTheme } from "../../context/ThemeContext";
 
 const Header = ({ showSidebar, setShowSidebar }) => {
+  const { theme } = useTheme();
+
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "About", path: "/about" },
@@ -20,17 +24,23 @@ const Header = ({ showSidebar, setShowSidebar }) => {
           to="/"
           className="group flex items-center gap-2 text-xl font-display font-bold tracking-tight text-white"
         >
-          <span className="text-cyan-400 font-mono text-xl transition-transform group-hover:-translate-x-1 duration-200">
+          <span
+            className="font-mono text-xl transition-transform group-hover:-translate-x-1 duration-200"
+            style={{ color: theme.secondary }}
+          >
             &lt;
           </span>
-          <span className="gradient-text font-extrabold text-2xl tracking-wide">
+          <span className="font-extrabold text-2xl tracking-wide gradient-text">
             Dineshkumar
           </span>
-          <span className="text-indigo-400 font-mono text-xl transition-transform group-hover:translate-x-1 duration-200">
+          <span
+            className="font-mono text-xl transition-transform group-hover:translate-x-1 duration-200"
+            style={{ color: theme.primary }}
+          >
             /&gt;
           </span>
-          <span className="hidden sm:inline-flex items-center gap-1.5 ml-2 px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span className={`hidden sm:inline-flex items-center gap-1.5 ml-2 px-2.5 py-0.5 rounded-full text-xs font-medium ${theme.badgeBg}`}>
+            <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: theme.primary }}></span>
             Available
           </span>
         </Link>
@@ -44,7 +54,7 @@ const Header = ({ showSidebar, setShowSidebar }) => {
               className={({ isActive }) =>
                 `px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                   isActive
-                    ? "bg-gradient-to-r from-indigo-500 to-cyan-500 text-white shadow-md shadow-indigo-500/25"
+                    ? `bg-gradient-to-r ${theme.buttonGradient} text-white shadow-md shadow-slate-950/50`
                     : "text-slate-300 hover:text-white hover:bg-slate-800/60"
                 }`
               }
@@ -54,11 +64,13 @@ const Header = ({ showSidebar, setShowSidebar }) => {
           ))}
         </nav>
 
-        {/* Desktop CTA & Mobile Toggle */}
-        <div className="flex items-center gap-4">
+        {/* Desktop CTA, Theme Selector & Mobile Toggle */}
+        <div className="flex items-center gap-3 sm:gap-4">
+          <ThemeSelector />
+
           <Link
             to="/contact"
-            className="hidden sm:inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white rounded-full bg-gradient-to-r from-indigo-600 via-indigo-500 to-cyan-500 hover:opacity-95 shadow-md shadow-indigo-500/20 hover:shadow-indigo-500/40 transition-all hover:scale-[1.03] active:scale-[0.98]"
+            className={`hidden sm:inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white rounded-full bg-gradient-to-r ${theme.buttonGradient} hover:opacity-95 shadow-md transition-all hover:scale-[1.03] active:scale-[0.98]`}
           >
             <span>Let's Talk</span>
             <FiSend size={14} />

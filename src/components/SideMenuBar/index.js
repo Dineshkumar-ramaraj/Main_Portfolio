@@ -2,6 +2,7 @@ import React from "react";
 import { IoClose } from "react-icons/io5";
 import { NavLink, Link } from "react-router-dom";
 import { FaHome, FaUser, FaLaptopCode, FaFolderOpen, FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
+import ThemeSelector from "../ThemeSelector";
 
 const SideMenubar = ({ showSidebar, setShowSidebar }) => {
   const navItems = [
@@ -32,7 +33,7 @@ const SideMenubar = ({ showSidebar, setShowSidebar }) => {
         }`}
       >
         <div>
-          {/* Header & Close button */}
+          {/* Header, Theme Selector & Close button */}
           <div className="flex items-center justify-between pb-6 border-b border-slate-800/70">
             <Link to="/" onClick={closeSidebar} className="flex items-center gap-1.5 font-display font-bold text-lg">
               <span className="text-cyan-400 font-mono">&lt;</span>
@@ -40,13 +41,16 @@ const SideMenubar = ({ showSidebar, setShowSidebar }) => {
               <span className="text-indigo-400 font-mono">/&gt;</span>
             </Link>
 
-            <button
-              onClick={closeSidebar}
-              className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors focus:outline-none"
-              aria-label="Close menu"
-            >
-              <IoClose size={24} />
-            </button>
+            <div className="flex items-center gap-2">
+              <ThemeSelector />
+              <button
+                onClick={closeSidebar}
+                className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors focus:outline-none"
+                aria-label="Close menu"
+              >
+                <IoClose size={24} />
+              </button>
+            </div>
           </div>
 
           {/* Nav links */}

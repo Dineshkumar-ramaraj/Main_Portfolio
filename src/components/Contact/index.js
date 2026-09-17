@@ -10,33 +10,37 @@ import {
   FaCheckCircle,
   FaCopy
 } from "react-icons/fa";
+import { useTheme } from "../../context/ThemeContext";
 
 const Contact = () => {
+  const { theme } = useTheme();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    subject: "Full-Time Opportunity",
+    subject: "Freelance Project",
     message: "",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const inquiryTypes = [
-    "Full-Time Opportunity",
     "Freelance Project",
-    "Collaboration",
-    "Just Saying Hi",
+    "Full-Time Role",
+    "AI / ML Solution",
+    "Web App Development",
+    "Consultation",
   ];
 
   const contactInfo = [
     {
-      icon: <FaEnvelope className="text-cyan-400" size={20} />,
+      icon: <FaEnvelope style={{ color: theme.secondary }} size={20} />,
       label: "Email",
       value: "dineshkumar.ramaraj@gmail.com",
       action: "copy",
     },
     {
-      icon: <FaPhoneAlt className="text-indigo-400" size={18} />,
+      icon: <FaPhoneAlt style={{ color: theme.primary }} size={18} />,
       label: "Phone / WhatsApp",
       value: "+91 98765 43210",
       action: "call",
@@ -57,7 +61,7 @@ const Contact = () => {
   const copyEmail = (text) => {
     navigator.clipboard.writeText(text);
     toast.success("Email copied to clipboard!", {
-      icon: <FaCheckCircle className="text-cyan-400" />,
+      icon: <FaCheckCircle style={{ color: theme.primary }} />,
     });
   };
 
@@ -71,17 +75,16 @@ const Contact = () => {
 
     setIsSubmitting(true);
 
-    // Simulate clean submission with feedback
     setTimeout(() => {
       setIsSubmitting(false);
       toast.success("Thank you! Your message has been sent successfully.", {
         duration: 4000,
-        icon: <FaCheckCircle className="text-emerald-400" />,
+        icon: <FaCheckCircle style={{ color: theme.primary }} />,
       });
       setFormData({
         name: "",
         email: "",
-        subject: "Full-Time Opportunity",
+        subject: "Freelance Project",
         message: "",
       });
     }, 1000);
@@ -90,20 +93,26 @@ const Contact = () => {
   return (
     <div className="relative min-h-[calc(100vh-80px)] py-16 px-6 sm:px-12 lg:px-24">
       {/* Background ambient lighting */}
-      <div className="absolute top-20 left-10 w-96 h-96 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none animate-pulse-glow" />
-      <div className="absolute bottom-20 right-10 w-96 h-96 bg-cyan-600/10 rounded-full blur-3xl pointer-events-none animate-pulse-glow" style={{ animationDelay: '2s' }} />
+      <div
+        className="absolute top-20 left-10 w-96 h-96 rounded-full blur-3xl pointer-events-none animate-pulse-glow"
+        style={{ backgroundColor: theme.glow1 }}
+      />
+      <div
+        className="absolute bottom-20 right-10 w-96 h-96 rounded-full blur-3xl pointer-events-none animate-pulse-glow"
+        style={{ backgroundColor: theme.glow2, animationDelay: '2s' }}
+      />
 
       <div className="max-w-7xl mx-auto relative z-10 space-y-12">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
-            Let's Connect
+          <div className={`inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-semibold ${theme.badgeBg}`}>
+            Available For Freelance & Full-Time
           </div>
           <h1 className="text-3xl sm:text-5xl font-display font-extrabold text-white tracking-tight">
             Get In <span className="gradient-text">Touch</span>
           </h1>
           <p className="text-slate-400 text-base sm:text-lg">
-            Have a project in mind, an opportunity to discuss, or simply want to say hello? My inbox is always open.
+            Looking for a freelance engineer, an AI/ML developer, or have an open role? Let’s connect and make it happen.
           </p>
         </div>
 
@@ -117,7 +126,7 @@ const Contact = () => {
                 Contact Information
               </h2>
               <p className="text-slate-400 text-sm leading-relaxed">
-                Feel free to reach out directly through any of the channels below. I typically respond within 24 hours.
+                Whether you need a custom Machine Learning pipeline, an LLM/RAG app, or a modern full-stack web application, feel free to reach out.
               </p>
 
               <div className="space-y-4 pt-2">
@@ -127,7 +136,7 @@ const Contact = () => {
                     className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 flex items-center justify-between group hover:border-slate-700 transition-all"
                   >
                     <div className="flex items-center gap-3.5">
-                      <div className="p-2.5 rounded-xl bg-slate-800 text-cyan-400">
+                      <div className="p-2.5 rounded-xl bg-slate-800">
                         {info.icon}
                       </div>
                       <div>
@@ -140,7 +149,7 @@ const Contact = () => {
                       <button
                         type="button"
                         onClick={() => copyEmail(info.value)}
-                        className="p-2 rounded-lg text-slate-400 hover:text-cyan-400 hover:bg-slate-800 transition-all"
+                        className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-all"
                         title="Copy to clipboard"
                         aria-label="Copy email"
                       >
@@ -152,13 +161,21 @@ const Contact = () => {
               </div>
 
               {/* Status Card */}
-              <div className="p-4 rounded-2xl bg-gradient-to-r from-indigo-950/50 to-slate-900 border border-indigo-500/20">
+              <div
+                className="p-4 rounded-2xl border"
+                style={{
+                  backgroundColor: "rgba(15, 23, 42, 0.8)",
+                  borderColor: `${theme.primary}40`,
+                }}
+              >
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                  <span className="text-xs font-semibold text-emerald-400">Status: Ready to Hire</span>
+                  <span className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: theme.primary }}></span>
+                  <span className="text-xs font-semibold" style={{ color: theme.primary }}>
+                    Status: Open for Freelance & Full-Time
+                  </span>
                 </div>
                 <p className="text-xs text-slate-300">
-                  Open to full-time engineering roles, frontend developer positions, and high-impact web development teams.
+                  Ready to collaborate on contract gigs, freelance projects, and full-time software engineering roles.
                 </p>
               </div>
 
@@ -181,9 +198,10 @@ const Contact = () => {
                     href="https://www.linkedin.com/in/dineshkumar-ramaraj-b1275a228/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 py-3 px-4 rounded-xl glass-card text-xs font-semibold text-slate-300 hover:text-cyan-400 hover:border-cyan-500/30 flex items-center justify-center gap-2 transition-all hover:scale-105"
+                    className="flex-1 py-3 px-4 rounded-xl glass-card text-xs font-semibold text-slate-300 hover:text-white flex items-center justify-center gap-2 transition-all hover:scale-105"
+                    style={{ borderColor: `${theme.primary}30` }}
                   >
-                    <FaLinkedin size={16} />
+                    <FaLinkedin size={16} style={{ color: theme.secondary }} />
                     <span>LinkedIn</span>
                   </a>
                 </div>
@@ -197,14 +215,14 @@ const Contact = () => {
               Send a Message
             </h2>
             <p className="text-slate-400 text-sm mb-6">
-              Fill out the form below and I'll get back to you promptly.
+              Share details about your freelance idea, company project, or inquiry.
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-5">
               {/* Inquiry Type selector */}
               <div>
                 <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2.5">
-                  Subject / Topic
+                  Project Type / Subject
                 </label>
                 <div className="flex flex-wrap gap-2">
                   {inquiryTypes.map((type) => (
@@ -214,9 +232,19 @@ const Contact = () => {
                       onClick={() => setFormData((prev) => ({ ...prev, subject: type }))}
                       className={`px-3.5 py-1.5 rounded-xl text-xs font-medium transition-all ${
                         formData.subject === type
-                          ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 font-semibold"
+                          ? "text-white font-semibold shadow-sm"
                           : "bg-slate-900 text-slate-400 border border-slate-800 hover:text-slate-200"
                       }`}
+                      style={
+                        formData.subject === type
+                          ? {
+                              backgroundColor: `${theme.primary}25`,
+                              borderColor: `${theme.primary}60`,
+                              color: theme.accent,
+                              borderWidth: "1px",
+                            }
+                          : {}
+                      }
                     >
                       {type}
                     </button>
@@ -238,7 +266,7 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleInputChange}
                     placeholder="John Doe"
-                    className="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all"
+                    className="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none transition-all"
                   />
                 </div>
 
@@ -254,7 +282,7 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     placeholder="john@example.com"
-                    className="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all"
+                    className="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none transition-all"
                   />
                 </div>
               </div>
@@ -262,7 +290,7 @@ const Contact = () => {
               {/* Message */}
               <div>
                 <label htmlFor="message" className="block text-xs font-semibold text-slate-300 mb-1.5">
-                  Your Message *
+                  Your Message / Project Details *
                 </label>
                 <textarea
                   id="message"
@@ -271,8 +299,8 @@ const Contact = () => {
                   rows={5}
                   value={formData.message}
                   onChange={handleInputChange}
-                  placeholder="Share details about your project, opportunity, or inquiry..."
-                  className="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all resize-none"
+                  placeholder="Tell me about your project scope, requirements, or role..."
+                  className="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none transition-all resize-none"
                 />
               </div>
 
@@ -281,7 +309,7 @@ const Contact = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-3.5 px-6 rounded-xl font-semibold text-sm text-white bg-gradient-to-r from-indigo-600 via-indigo-500 to-cyan-500 hover:opacity-95 shadow-lg shadow-indigo-500/25 transition-all duration-300 flex items-center justify-center gap-2 hover:scale-[1.01] active:scale-[0.99] disabled:opacity-60"
+                  className={`w-full py-3.5 px-6 rounded-xl font-semibold text-sm text-white bg-gradient-to-r ${theme.buttonGradient} hover:opacity-95 shadow-lg transition-all duration-300 flex items-center justify-center gap-2 hover:scale-[1.01] active:scale-[0.99] disabled:opacity-60`}
                 >
                   {isSubmitting ? (
                     <span className="inline-flex items-center gap-2">

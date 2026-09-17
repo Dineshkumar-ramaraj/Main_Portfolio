@@ -5,72 +5,104 @@ import {
   FaCode, 
   FaRocket, 
   FaLaptopCode, 
-  FaCheckCircle, 
   FaArrowRight,
-  FaServer,
-  FaLayerGroup
+  FaBrain,
+  FaChartLine,
+  FaCertificate
 } from "react-icons/fa";
+import { useTheme } from "../../context/ThemeContext";
 
 const About = () => {
-  const highlights = [
+  const { theme } = useTheme();
+
+  const certifications = [
     {
-      icon: <FaGraduationCap className="text-cyan-400" size={24} />,
-      title: "Master's Degree (MCA)",
-      description: "Holds a Master of Computer Applications, establishing a strong foundation in computer science and software principles.",
+      institution: "IIT Kharagpur & Masai Learning",
+      title: "Generative AI, LLMs & RAG",
+      desc: "Certified in building context-aware AI applications, fine-tuning, retrieval-augmented generation pipelines, and prompt engineering.",
+      badge: "IIT KGP Certified",
+      icon: <FaBrain className="text-cyan-400" size={24} />,
     },
     {
+      institution: "Intellipaat",
+      title: "AI / ML & Data Science",
+      desc: "Comprehensive mastery of Python, NumPy, Pandas, Matplotlib, Scipy, Statistics, Probability, and Machine Learning algorithms.",
+      badge: "In-Progress / Certified",
+      icon: <FaChartLine className="text-emerald-400" size={24} />,
+    },
+    {
+      institution: "Nxtwave Disruptive Technologies",
+      title: "Full Stack Web Development & DSA",
+      desc: "Intensive training covering Frontend (React.js), Backend (Node.js, Express), Databases (SQL, MongoDB), and Data Structures & Algorithms.",
+      badge: "Alumni Verified",
       icon: <FaLaptopCode className="text-indigo-400" size={24} />,
-      title: "Full Stack Focus",
-      description: "Specialized in building end-to-end applications using modern JavaScript/TypeScript, React.js, and Node.js.",
     },
     {
-      icon: <FaRocket className="text-purple-400" size={24} />,
-      title: "Hands-on Project Builder",
-      description: "Created real-world applications including quiz assessment portals, movie discovery apps, and complex streaming clones.",
-    },
-    {
-      icon: <FaCheckCircle className="text-emerald-400" size={24} />,
-      title: "Clean Code & UX",
-      description: "Dedicated to semantic markup, mobile-first responsiveness, intuitive interactions, and performant architectures.",
+      institution: "Post Graduation",
+      title: "Master of Computer Applications (MCA)",
+      desc: "Advanced academic foundation in software architecture, computer networking, systems analysis, and enterprise computing.",
+      badge: "Post Graduate",
+      icon: <FaGraduationCap className="text-purple-400" size={24} />,
     },
   ];
 
   const competencies = [
     {
-      icon: <FaCode className="text-cyan-400" size={22} />,
-      title: "Frontend Engineering",
-      points: ["React.js & Hooks", "Tailwind CSS & Modern CSS", "State Management & React Router", "Responsive Mobile-First UI"],
+      icon: <FaBrain className="text-cyan-400" size={22} />,
+      title: "AI, ML & Generative AI",
+      points: [
+        "LLMs & RAG Architecture",
+        "LangChain & Vector Databases",
+        "Machine Learning Algorithms",
+        "NumPy, Pandas & Matplotlib",
+      ],
     },
     {
-      icon: <FaServer className="text-indigo-400" size={22} />,
-      title: "Backend & Database",
-      points: ["Node.js & Express", "RESTful API Development", "SQL & MySQL Queries", "MongoDB & Data Modeling"],
+      icon: <FaCode className="text-emerald-400" size={22} />,
+      title: "Full Stack Engineering",
+      points: [
+        "React.js & Tailwind CSS",
+        "Node.js & Express.js REST APIs",
+        "SQL / MySQL & MongoDB",
+        "Data Structures & Algorithms (DSA)",
+      ],
     },
     {
-      icon: <FaLayerGroup className="text-purple-400" size={22} />,
-      title: "Workflow & Engineering",
-      points: ["Git & GitHub Collaboration", "Component-Driven Architecture", "Performance Optimization", "Agile Learning Mindset"],
+      icon: <FaRocket className="text-purple-400" size={22} />,
+      title: "Freelance & Production Ready",
+      points: [
+        "End-to-end Project Delivery",
+        "Clean, Maintainable Architecture",
+        "Performance Optimization & SEO",
+        "Agile Communication & Timely Delivery",
+      ],
     },
   ];
 
   return (
     <div className="relative min-h-[calc(100vh-80px)] py-16 px-6 sm:px-12 lg:px-24">
       {/* Background ambient lighting */}
-      <div className="absolute top-20 right-10 w-96 h-96 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none animate-pulse-glow" />
-      <div className="absolute bottom-10 left-10 w-96 h-96 bg-cyan-600/10 rounded-full blur-3xl pointer-events-none animate-pulse-glow" style={{ animationDelay: '2s' }} />
+      <div
+        className="absolute top-20 right-10 w-96 h-96 rounded-full blur-3xl pointer-events-none animate-pulse-glow"
+        style={{ backgroundColor: theme.glow1 }}
+      />
+      <div
+        className="absolute bottom-10 left-10 w-96 h-96 rounded-full blur-3xl pointer-events-none animate-pulse-glow"
+        style={{ backgroundColor: theme.glow2, animationDelay: '2s' }}
+      />
 
       <div className="max-w-7xl mx-auto relative z-10 space-y-16">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-semibold bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
+          <div className={`inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-semibold ${theme.badgeBg}`}>
             Get To Know Me
           </div>
           <h1 className="text-3xl sm:text-5xl font-display font-extrabold text-white tracking-tight">
             About <span className="gradient-text">Dineshkumar</span>
           </h1>
           <p className="text-slate-400 text-base sm:text-lg">
-            A developer who loves turning complex problems into elegant, fast, and accessible digital products.
+            Full Stack & AI/ML Developer blending computer science fundamentals with cutting-edge Generative AI and modern web engineering.
           </p>
         </div>
 
@@ -80,58 +112,68 @@ const About = () => {
           {/* Left Narrative Card */}
           <div className="lg:col-span-7 glass-card p-8 sm:p-10 rounded-3xl space-y-6 border border-slate-800 shadow-xl">
             <h2 className="text-2xl font-display font-bold text-white flex items-center gap-3">
-              <span>My Journey & Philosophy</span>
-              <span className="h-px flex-1 bg-gradient-to-r from-cyan-500/50 to-transparent"></span>
+              <span>My Background & Journey</span>
+              <span className="h-px flex-1 bg-gradient-to-r from-emerald-500/50 to-transparent"></span>
             </h2>
 
             <div className="space-y-4 text-slate-300 text-base sm:text-lg leading-relaxed">
               <p>
-                I am a passionate web developer with a <strong className="text-white font-semibold">Master’s degree in Computer Applications (MCA)</strong>. My journey into tech began with a deep curiosity about how digital interfaces work under the hood, which quickly evolved into a dedicated passion for creating high-caliber web applications.
+                I hold a <strong className="text-white font-semibold">Master of Computer Applications (MCA)</strong> and have dedicated my career to mastering modern software engineering. My technical foundation was built through rigorous hands-on training at <strong className="text-emerald-400 font-semibold">Nxtwave</strong>, where I developed full stack proficiency in React, Node.js, and solid algorithmic problem-solving with <strong className="text-white font-medium">Data Structures & Algorithms (DSA)</strong>.
               </p>
               <p>
-                Specializing in the modern JavaScript ecosystem, I focus on building with <strong className="text-cyan-400 font-medium">React.js</strong> on the frontend and <strong className="text-indigo-400 font-medium">Node.js & Express</strong> on the backend. From state management to responsive design systems, I enjoy every layer of turning an idea into a deployed, interactive reality.
+                Expanding my expertise into modern intelligent systems, I earned certifications in <strong className="text-cyan-400 font-semibold">Generative AI, LLMs, and RAG</strong> from <strong className="text-white font-medium">Masai Learning & IIT Kharagpur</strong>. Currently, I am further expanding into deep <strong className="text-indigo-400 font-semibold">Data Science & AI/ML with Intellipaat</strong>—focusing on NumPy, Pandas, Matplotlib, Scipy, Statistics, Probability, and predictive modeling.
               </p>
               <p>
-                I have built projects such as a <span className="text-white font-medium">Quiz Assessment Platform</span>, a <span className="text-white font-medium">Dynamic Movies Application</span> with external API sync, and high-fidelity platform clones. These experiences have honed my ability to handle real-time data, optimize rendering performance, and write maintainable code.
-              </p>
-              <p>
-                As a fast learner and enthusiastic problem solver, I am excited to collaborate with engineering teams to build innovative web products that deliver exceptional user experiences.
+                Beyond full-time engineering roles, I am actively interested in <strong className="text-white font-semibold">Freelancing projects</strong>—helping startups, businesses, and clients architect AI-powered features, intuitive dashboards, and performant web applications.
               </p>
             </div>
 
             <div className="pt-4 flex flex-wrap items-center gap-4">
               <Link
                 to="/skills"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium text-white bg-indigo-600/80 hover:bg-indigo-600 transition-colors"
+                className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-gradient-to-r ${theme.buttonGradient} shadow-md transition-all hover:scale-105`}
               >
-                <span>View My Technical Skills</span>
+                <span>View My AI & Tech Skills</span>
                 <FaArrowRight size={12} />
               </Link>
               <Link
-                to="/projects"
+                to="/contact"
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium text-slate-300 bg-slate-900 border border-slate-800 hover:text-white hover:bg-slate-800 transition-colors"
               >
-                <span>Explore Projects</span>
+                <span>Discuss a Freelance Project</span>
               </Link>
             </div>
           </div>
 
-          {/* Right Highlights Cards */}
+          {/* Right: Certifications & Education Timeline */}
           <div className="lg:col-span-5 space-y-4">
-            {highlights.map((item, index) => (
+            <h3 className="text-lg font-bold text-white flex items-center gap-2 px-1">
+              <FaCertificate style={{ color: theme.primary }} />
+              <span>Certifications & Education</span>
+            </h3>
+
+            {certifications.map((item, index) => (
               <div
                 key={index}
-                className="glass-card glass-card-hover p-5 rounded-2xl flex items-start gap-4"
+                className="glass-card glass-card-hover p-5 rounded-2xl flex items-start gap-4 border border-slate-800/80"
               >
                 <div className="p-3 rounded-xl bg-slate-900/90 border border-slate-800 shrink-0">
                   {item.icon}
                 </div>
-                <div>
-                  <h3 className="text-base font-semibold text-white">
+                <div className="space-y-1">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-800 text-cyan-300 border border-slate-700">
+                      {item.badge}
+                    </span>
+                  </div>
+                  <h4 className="text-base font-semibold text-white">
                     {item.title}
-                  </h3>
-                  <p className="text-sm text-slate-400 mt-1 leading-normal">
-                    {item.description}
+                  </h4>
+                  <p className="text-xs font-medium text-slate-300">
+                    {item.institution}
+                  </p>
+                  <p className="text-xs text-slate-400 leading-relaxed">
+                    {item.desc}
                   </p>
                 </div>
               </div>
@@ -143,10 +185,10 @@ const About = () => {
         <div className="space-y-8">
           <div className="text-center max-w-2xl mx-auto">
             <h2 className="text-2xl sm:text-3xl font-display font-bold text-white">
-              What I Bring To Your Team
+              What I Bring To The Table
             </h2>
             <p className="text-slate-400 text-sm sm:text-base mt-2">
-              Combining academic grounding with hands-on modern web development.
+              A comprehensive fusion of Full Stack engineering, AI/ML development, and freelance adaptability.
             </p>
           </div>
 
@@ -166,7 +208,7 @@ const About = () => {
                   <ul className="mt-4 space-y-2.5">
                     {comp.points.map((pt, pIdx) => (
                       <li key={pIdx} className="flex items-center gap-2 text-sm text-slate-300">
-                        <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                        <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: theme.primary }}></span>
                         <span>{pt}</span>
                       </li>
                     ))}
