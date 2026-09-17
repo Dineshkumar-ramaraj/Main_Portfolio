@@ -1,16 +1,21 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import { 
-  FaEnvelope, 
-  FaPhoneAlt, 
-  FaMapMarkerAlt, 
-  FaGithub, 
-  FaLinkedin, 
+import {
+  FaEnvelope,
+  FaPhoneAlt,
+  FaMapMarkerAlt,
+  FaGithub,
+  FaLinkedin,
   FaPaperPlane,
   FaCheckCircle,
   FaCopy
 } from "react-icons/fa";
 import { useTheme } from "../../context/ThemeContext";
+
+
+const ACCESS_KEY = process.env.REACT_APP_WEB3FORMS_KEY;
+const EMAIL_ADDRESS = process.env.REACT_APP_EMAIL;
+const PHONE_NUMBER = process.env.REACT_APP_PHONE;
 
 const Contact = () => {
   const { theme } = useTheme();
@@ -33,22 +38,32 @@ const Contact = () => {
   ];
 
   const contactInfo = [
+    ...(EMAIL_ADDRESS
+      ? [
+        {
+          icon: <FaEnvelope style={{ color: theme.secondary }} size={20} />,
+          label: "Email",
+          value: EMAIL_ADDRESS,
+          action: "copy",
+          href: `mailto:${EMAIL_ADDRESS}`,
+        },
+      ]
+      : []),
+    ...(PHONE_NUMBER
+      ? [
+        {
+          icon: <FaPhoneAlt style={{ color: theme.primary }} size={18} />,
+          label: "Phone / WhatsApp",
+          value: PHONE_NUMBER,
+          action: "call",
+          href: `tel:${PHONE_NUMBER.replace(/\s+/g, "")}`,
+        },
+      ]
+      : []),
     {
-      icon: <FaEnvelope style={{ color: theme.secondary }} size={20} />,
-      label: "Email",
-      value: "dineshkumar.ramaraj@gmail.com",
-      action: "copy",
-    },
-    {
-      icon: <FaPhoneAlt style={{ color: theme.primary }} size={18} />,
-      label: "Phone / WhatsApp",
-      value: "+91 98765 43210",
-      action: "call",
-    },
-    {
-      icon: <FaMapMarkerAlt className="text-purple-400" size={20} />,
+      icon: <FaMapMarkerAlt className="text-rose-400" size={20} />,
       label: "Location",
-      value: "Tamil Nadu, India",
+      value: "India 🇮🇳",
       action: null,
     },
   ];
@@ -65,7 +80,7 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
@@ -73,21 +88,60 @@ const Contact = () => {
       return;
     }
 
+    console.log("Access: ", ACCESS_KEY)
+
+    if (!ACCESS_KEY) {
+      toast.error(
+        "Web3Forms Access Key is not configured yet. Please check your .env file.",
+        { duration: 5000 }
+      );
+      return;
+    }
+
     setIsSubmitting(true);
 
-    setTimeout(() => {
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: ACCESS_KEY,
+          name: formData.name,
+          email: formData.email,
+          subject: `Portfolio Inquiry [${formData.subject}] from ${formData.name}`,
+          from_name: formData.name,
+          message: formData.message,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        toast.success("Thank you! Your message has been delivered to Dinesh.", {
+          duration: 5000,
+          icon: <FaCheckCircle style={{ color: theme.primary }} />,
+        });
+        setFormData({
+          name: "",
+          email: "",
+          subject: "Freelance Project",
+          message: "",
+        });
+      } else {
+        toast.error(result.message || "Failed to send message. Please try again.");
+      }
+    } catch (error) {
+      toast.error(
+        EMAIL_ADDRESS
+          ? `Network error. Please try sending directly to ${EMAIL_ADDRESS}`
+          : "Network error. Please try again later."
+      );
+    } finally {
       setIsSubmitting(false);
-      toast.success("Thank you! Your message has been sent successfully.", {
-        duration: 4000,
-        icon: <FaCheckCircle style={{ color: theme.primary }} />,
-      });
-      setFormData({
-        name: "",
-        email: "",
-        subject: "Freelance Project",
-        message: "",
-      });
-    }, 1000);
+    }
   };
 
   return (
@@ -118,7 +172,7 @@ const Contact = () => {
 
         {/* 2-Column Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-          
+
           {/* Left Column: Direct Contact & Socials */}
           <div className="lg:col-span-5 space-y-6">
             <div className="glass-card p-8 rounded-3xl space-y-6 border border-slate-800 shadow-xl">
@@ -141,7 +195,18 @@ const Contact = () => {
                       </div>
                       <div>
                         <p className="text-xs text-slate-400 font-medium">{info.label}</p>
-                        <p className="text-sm font-semibold text-slate-200">{info.value}</p>
+                        {info.href ? (
+                          <a
+                            href={info.href}
+                            className="text-sm font-semibold text-slate-200 hover:text-cyan-400 transition-colors"
+                          >
+                            {info.value}
+                          </a>
+                        ) : (
+                          <p className="text-sm font-semibold text-slate-200 flex items-center gap-1.5">
+                            {info.value}
+                          </p>
+                        )}
                       </div>
                     </div>
 
@@ -230,19 +295,18 @@ const Contact = () => {
                       key={type}
                       type="button"
                       onClick={() => setFormData((prev) => ({ ...prev, subject: type }))}
-                      className={`px-3.5 py-1.5 rounded-xl text-xs font-medium transition-all ${
-                        formData.subject === type
-                          ? "text-white font-semibold shadow-sm"
-                          : "bg-slate-900 text-slate-400 border border-slate-800 hover:text-slate-200"
-                      }`}
+                      className={`px-3.5 py-1.5 rounded-xl text-xs font-medium transition-all ${formData.subject === type
+                        ? "text-white font-semibold shadow-sm"
+                        : "bg-slate-900 text-slate-400 border border-slate-800 hover:text-slate-200"
+                        }`}
                       style={
                         formData.subject === type
                           ? {
-                              backgroundColor: `${theme.primary}25`,
-                              borderColor: `${theme.primary}60`,
-                              color: theme.accent,
-                              borderWidth: "1px",
-                            }
+                            backgroundColor: `${theme.primary}25`,
+                            borderColor: `${theme.primary}60`,
+                            color: theme.accent,
+                            borderWidth: "1px",
+                          }
                           : {}
                       }
                     >
