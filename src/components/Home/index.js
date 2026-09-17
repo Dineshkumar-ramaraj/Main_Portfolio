@@ -3,7 +3,7 @@ import Typed from "typed.js";
 import { Link } from "react-router-dom";
 import { FaGithub, FaLinkedin, FaArrowRight, FaReact, FaRobot, FaBrain } from "react-icons/fa";
 // import { HiSparkles } from "react-icons/hi2";
-import myProfileImage from "../../assets/images/myImage.jpg";
+import myProfileImage from "../../assets/images/My_image_3.png";
 import { useTheme } from "../../context/ThemeContext";
 import ENV from "../../config/env";
 
