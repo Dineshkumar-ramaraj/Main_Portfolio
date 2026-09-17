@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import Typed from "typed.js";
 import { Link } from "react-router-dom";
 import { FaGithub, FaLinkedin, FaArrowRight, FaReact, FaRobot, FaBrain } from "react-icons/fa";
-import { HiSparkles } from "react-icons/hi2";
+// import { HiSparkles } from "react-icons/hi2";
 import myProfileImage from "../../assets/images/myImage.jpg";
 import { useTheme } from "../../context/ThemeContext";
 import ENV from "../../config/env";
