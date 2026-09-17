@@ -23,7 +23,7 @@ const ProjectsList = ({ project }) => {
           <ul className="flex justify-between items-center">
             <div className="flex items-center space-x-2 pl-1">
               <IoLinkSharp className="text-slate-900" size={16} />
-              <h1 className="text-slate-900 font-medium text-lg font-[jetbrains mono,_sans-serif">
+              <h1 className="text-slate-900 font-medium text-lg font-[jetbrains_mono,_sans-serif]">
                 {projectName}
               </h1>
             </div>
@@ -43,7 +43,7 @@ const ProjectsList = ({ project }) => {
           <div className="flex items-center justify-between gap-5 pt-3">
             <a
               href={githubUrl}
-              target="_blink"
+              target="_blank" rel="noopener noreferrer"
               className="border border-slate-100 bg-black rounded-md flex space-x-3 py-1 px-3"
             >
               <span className="text-[14px] font-[Roboto] text-white">Code</span>
@@ -54,7 +54,7 @@ const ProjectsList = ({ project }) => {
             </a>
             <a
               href={websiteUrl}
-              target="_blink"
+              target="_blank" rel="noopener noreferrer"
               className="bg-yellow-400 rounded-md flex items-center space-x-3 py-1 px-3"
             >
               <span className="text-[14px] font-medium font-[Roboto] text-gray-900">
