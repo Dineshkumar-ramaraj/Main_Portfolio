@@ -374,8 +374,8 @@ const Skills = () => {
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
               className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-200 ${activeCategory === cat.id
-                  ? `bg-gradient-to-r ${theme.buttonGradient} text-white shadow-md font-semibold`
-                  : "text-slate-400 hover:text-slate-200 hover:bg-slate-800/50"
+                ? `bg-gradient-to-r ${theme.buttonGradient} text-white shadow-md font-semibold`
+                : "text-slate-400 hover:text-slate-200 hover:bg-slate-800/50"
                 }`}
             >
               {cat.label}
