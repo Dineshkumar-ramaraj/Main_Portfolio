@@ -1,17 +1,15 @@
 import React from "react";
-import { 
-  FaGithub, 
-  FaLinkedin, 
-  FaArrowUp, 
+import {
+  FaGithub,
+  FaLinkedin,
+  FaArrowUp,
   FaHeart,
   FaMapMarkerAlt
 } from "react-icons/fa";
 import { FiSend } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext";
-
-const EMAIL_ADDRESS = process.env.REACT_APP_EMAIL;
-const PHONE_NUMBER = process.env.REACT_APP_PHONE;
+import ENV from "../../config/env";
 
 const Footer = () => {
   const { theme } = useTheme();
@@ -38,13 +36,13 @@ const Footer = () => {
   return (
     <footer className="relative border-t border-slate-800/80 bg-slate-950/90 backdrop-blur-xl text-slate-400 pt-16 pb-12 px-6 sm:px-12 lg:px-20 overflow-hidden">
       {/* Subtle background glow */}
-      <div 
+      <div
         className="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-32 rounded-full blur-3xl pointer-events-none opacity-20"
         style={{ backgroundColor: theme.primary }}
       />
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-12 border-b border-slate-800/80">
-        
+
         {/* Column 1: Brand, Tagline & Availability */}
         <div className="lg:col-span-4 flex flex-col space-y-4">
           <Link to="/" className="text-2xl font-display font-bold tracking-tight text-white flex items-center gap-2">
@@ -55,15 +53,15 @@ const Footer = () => {
           <p className="text-sm text-slate-400 leading-relaxed max-w-sm">
             AI/ML Engineer & Full Stack Web Developer (MCA). Specializing in Generative AI, RAG pipelines, and interactive web applications.
           </p>
-          
+
           <div className="flex flex-col gap-2 pt-2 text-xs">
-            <div className="inline-flex items-center gap-2 text-emerald-400 font-medium">
+            {/* <div className="inline-flex items-center gap-2 text-emerald-400 font-medium">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
               </span>
               <span>Available for Full-Time & Freelance</span>
-            </div>
+            </div> */}
             <div className="flex items-center gap-1.5 text-slate-400">
               <FaMapMarkerAlt size={12} className="text-rose-400" />
               <span>India</span>
@@ -120,47 +118,51 @@ const Footer = () => {
           <p className="text-xs text-slate-400 leading-relaxed">
             Interested in collaboration, freelancing, or hiring? Drop a line anytime.
           </p>
-          
-          {(EMAIL_ADDRESS || PHONE_NUMBER) && (
+
+          {(ENV.EMAIL || ENV.PHONE) && (
             <div className="space-y-1.5 pt-1">
-              {EMAIL_ADDRESS && (
+              {ENV.EMAIL && (
                 <a
-                  href={`mailto:${EMAIL_ADDRESS}`}
+                  href={`mailto:${ENV.EMAIL}`}
                   className="block text-xs font-mono text-cyan-400 hover:underline break-all"
                 >
-                  {EMAIL_ADDRESS}
+                  {ENV.EMAIL}
                 </a>
               )}
-              {PHONE_NUMBER && (
+              {ENV.PHONE && (
                 <a
-                  href={`tel:${PHONE_NUMBER.replace(/\s+/g, "")}`}
+                  href={`tel:${ENV.PHONE.replace(/\s+/g, "")}`}
                   className="block text-xs font-mono text-slate-300 hover:text-white transition-colors"
                 >
-                  {PHONE_NUMBER}
+                  {ENV.PHONE}
                 </a>
               )}
             </div>
           )}
 
           <div className="flex items-center gap-2.5 pt-1">
-            <a
-              href="https://github.com/DineshRamaraj"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:border-slate-700 hover:bg-slate-800/80 transition-all hover:scale-105"
-              aria-label="GitHub Profile"
-            >
-              <FaGithub size={16} />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/dineshkumar-ramaraj-b1275a228/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-cyan-400 hover:border-cyan-500/30 hover:bg-slate-800/80 transition-all hover:scale-105"
-              aria-label="LinkedIn Profile"
-            >
-              <FaLinkedin size={16} />
-            </a>
+            {ENV.GITHUB_URL && (
+              <a
+                href={ENV.GITHUB_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:border-slate-700 hover:bg-slate-800/80 transition-all hover:scale-105"
+                aria-label="GitHub Profile"
+              >
+                <FaGithub size={16} />
+              </a>
+            )}
+            {ENV.LINKEDIN_URL && (
+              <a
+                href={ENV.LINKEDIN_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-cyan-400 hover:border-cyan-500/30 hover:bg-slate-800/80 transition-all hover:scale-105"
+                aria-label="LinkedIn Profile"
+              >
+                <FaLinkedin size={16} />
+              </a>
+            )}
             <Link
               to="/contact"
               className={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-white bg-gradient-to-r ${theme.buttonGradient} hover:opacity-90 shadow-md transition-all hover:scale-105`}

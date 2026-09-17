@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ProjectsList from "../ProjectsList";
 import { FaCode, FaRobot } from "react-icons/fa";
 import { useTheme } from "../../context/ThemeContext";
+import ENV from "../../config/env";
 
 const projectsData = [
   // AI / ML & GenAI Projects
@@ -11,8 +12,8 @@ const projectsData = [
     category: "AI & ML",
     description: "Production-grade Retrieval-Augmented Generation (RAG) system utilizing LangChain, Vector Embeddings, and LLMs to answer contextual questions over custom enterprise documentation.",
     tech: ["Python", "LangChain", "RAG", "Vector DB", "FastAPI", "Streamlit"],
-    websiteUrl: "https://github.com/DineshRamaraj",
-    githubUrl: "https://github.com/DineshRamaraj",
+    websiteUrl: "https://github.com/Dineshkumar-ramaraj",
+    githubUrl: "https://github.com/Dineshkumar-ramaraj",
     imageUrl: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=600&auto=format&fit=crop",
   },
   {
@@ -21,8 +22,8 @@ const projectsData = [
     category: "AI & ML",
     description: "End-to-end Machine Learning classification pipeline predicting customer churn with 91% accuracy, built with NumPy, Pandas, Scikit-Learn, and statistical exploratory data analysis.",
     tech: ["Python", "Pandas", "NumPy", "Scikit-Learn", "Matplotlib", "Statistics"],
-    websiteUrl: "https://github.com/DineshRamaraj",
-    githubUrl: "https://github.com/DineshRamaraj",
+    websiteUrl: "https://github.com/Dineshkumar-ramaraj",
+    githubUrl: "https://github.com/Dineshkumar-ramaraj",
     imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop",
   },
   {
@@ -31,8 +32,8 @@ const projectsData = [
     category: "AI & ML",
     description: "Natural Language Processing system performing multi-class sentiment classification, keyword extraction, and sentiment trends visualization on consumer reviews.",
     tech: ["Python", "Scikit-Learn", "NLP", "Pandas", "Streamlit", "Matplotlib"],
-    websiteUrl: "https://github.com/DineshRamaraj",
-    githubUrl: "https://github.com/DineshRamaraj",
+    websiteUrl: "https://github.com/Dineshkumar-ramaraj",
+    githubUrl: "https://github.com/Dineshkumar-ramaraj",
     imageUrl: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=600&auto=format&fit=crop",
   },
 
@@ -44,7 +45,7 @@ const projectsData = [
     description: "An interactive assessment platform with real-time countdown timer, question navigation, scoring algorithms, and instant result analysis.",
     tech: ["React.js", "Timer Hooks", "State Management", "Tailwind CSS"],
     websiteUrl: "https://dinassessapp.ccbp.tech",
-    githubUrl: "https://github.com/DineshRamaraj/React_Assessment_Mini_Project.git",
+    githubUrl: "https://github.com/Dineshkumar-ramaraj/React_Assessment_Mini_Project.git",
     imageUrl: "https://res.cloudinary.com/dhwz560kk/image/upload/v1728300833/xwtboqzgfbnhpwfc8phy.png",
   },
   {
@@ -54,7 +55,7 @@ const projectsData = [
     description: "Dynamic entertainment platform allowing users to browse trending movies, filter by genres, view ratings, and access detailed movie profiles.",
     tech: ["React.js", "REST API", "React Slick", "Responsive UI"],
     websiteUrl: "https://dinmovieapp.ccbp.tech/",
-    githubUrl: "https://github.com/DineshRamaraj/React_Movie_App_Project.git",
+    githubUrl: "https://github.com/Dineshkumar-ramaraj/React_Movie_App_Project.git",
     imageUrl: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=600&auto=format&fit=crop",
   },
   {
@@ -64,7 +65,7 @@ const projectsData = [
     description: "Pixel-perfect clone of the Netflix streaming interface featuring hero banner trailers, categorized horizontal sliders, and responsive video modals.",
     tech: ["React.js", "Styled Components", "Video Embeds", "CSS Grid"],
     websiteUrl: "https://venkatsnetflix.ccbp.tech/",
-    githubUrl: "https://github.com/DineshRamaraj/React_Movie_App_Project.git",
+    githubUrl: "https://github.com/Dineshkumar-ramaraj/React_Movie_App_Project.git",
     imageUrl: "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?q=80&w=600&auto=format&fit=crop",
   },
   {
@@ -74,7 +75,7 @@ const projectsData = [
     description: "Feature-packed video streaming clone with responsive grid feeds, interactive sidebar navigation, video player view, and theme toggling.",
     tech: ["React.js", "React Router", "Theme Context", "YouTube API"],
     websiteUrl: "https://venkatsnetflix.ccbp.tech/",
-    githubUrl: "https://github.com/DineshRamaraj/React_Movie_App_Project.git",
+    githubUrl: "https://github.com/Dineshkumar-ramaraj/React_Movie_App_Project.git",
     imageUrl: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=600&auto=format&fit=crop",
   },
   {
@@ -84,7 +85,7 @@ const projectsData = [
     description: "Clean and snappy search utility interfacing with Wikipedia's open API to fetch live summaries, thumbnails, and verified links instantly.",
     tech: ["JavaScript", "Fetch API", "DOM Manipulation", "Modern CSS"],
     websiteUrl: "https://dineshpedia.ccbp.tech/",
-    githubUrl: "https://github.com/DineshRamaraj/React_Movie_App_Project.git",
+    githubUrl: "https://github.com/Dineshkumar-ramaraj/React_Movie_App_Project.git",
     imageUrl: "https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?q=80&w=600&auto=format&fit=crop",
   },
 ];
@@ -162,7 +163,7 @@ const Projects = () => {
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
             <a
-              href="https://github.com/DineshRamaraj"
+              href={ENV.GITHUB_URL || "https://github.com"}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white bg-slate-900 hover:bg-slate-800 border border-slate-700/80 hover:border-slate-600 transition-all hover:scale-105"

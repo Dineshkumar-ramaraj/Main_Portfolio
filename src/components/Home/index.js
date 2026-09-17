@@ -1,23 +1,29 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Typed from "typed.js";
 import { Link } from "react-router-dom";
 import { FaGithub, FaLinkedin, FaArrowRight, FaReact, FaRobot, FaBrain } from "react-icons/fa";
 import { HiSparkles } from "react-icons/hi2";
 import myProfileImage from "../../assets/images/myImage.jpg";
 import { useTheme } from "../../context/ThemeContext";
+import ENV from "../../config/env";
 
 const Home = () => {
   const { theme } = useTheme();
+  const typedElementRef = useRef(null);
+  const typedInstanceRef = useRef(null);
 
   useEffect(() => {
-    const typed = new Typed(".typing-element", {
+    if (!typedElementRef.current) return;
+
+    typedInstanceRef.current = new Typed(typedElementRef.current, {
       strings: [
-        "AI & Machine Learning Engineer",
-        "Generative AI & RAG Specialist",
-        "Full Stack Developer (MERN)",
-        "Data Science & Python Practitioner",
-        "Freelance Software Developer",
-        "MCA Post Graduate",
+        "AI & ML Engineer",
+        "Generative AI Specialist",
+        "LLM & RAG Specialist",
+        "Full Stack Developer",
+        "Data Science Practitioner",
+        "Software Developer",
+        "Freelancer"
       ],
       typeSpeed: 55,
       backSpeed: 35,
@@ -25,10 +31,13 @@ const Home = () => {
       loop: true,
       showCursor: true,
       cursorChar: "|",
+      autoInsertCss: true,
     });
 
     return () => {
-      typed.destroy();
+      if (typedInstanceRef.current) {
+        typedInstanceRef.current.destroy();
+      }
     };
   }, []);
 
@@ -52,12 +61,12 @@ const Home = () => {
       />
 
       <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center relative z-10">
-        
+
         {/* Left Content Column */}
         <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left space-y-6">
-          
+
           {/* Status badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/80 border border-slate-700/60 shadow-lg backdrop-blur-md">
+          {/* <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/80 border border-slate-700/60 shadow-lg backdrop-blur-md">
             <span className="flex h-2 w-2 relative">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
@@ -65,7 +74,7 @@ const Home = () => {
             <span className="text-xs font-medium text-slate-300 flex items-center gap-1.5">
               Available for Full-Time & Freelance Projects <HiSparkles className="text-yellow-400" />
             </span>
-          </div>
+          </div> */}
 
           {/* Heading */}
           <div className="space-y-2">
@@ -75,10 +84,11 @@ const Home = () => {
             <h1 className="text-4xl sm:text-6xl font-display font-extrabold text-white tracking-tight leading-tight">
               Dineshkumar <span className="gradient-text">Ramaraj</span>
             </h1>
-            <div className="text-xl sm:text-3xl font-display font-semibold text-slate-300 min-h-[44px] flex items-center justify-center lg:justify-start">
-              <span>I am an&nbsp;</span>
+            <div className="text-xl sm:text-3xl font-display font-semibold text-slate-300 min-h-[52px] sm:min-h-[44px] flex flex-wrap items-center justify-center lg:justify-start">
+              <span className="shrink-0">I am an&nbsp;</span>
               <span
-                className="typing-element font-bold underline decoration-2 underline-offset-4"
+                ref={typedElementRef}
+                className="font-bold underline decoration-2 underline-offset-4 inline-block whitespace-nowrap"
                 style={{ color: theme.primary }}
               ></span>
             </div>
@@ -108,7 +118,7 @@ const Home = () => {
 
             <div className="flex items-center gap-3 pl-2 sm:pl-4 border-l border-slate-800">
               <a
-                href="https://github.com/DineshRamaraj"
+                href={ENV.GITHUB_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-3 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-400 hover:text-white hover:border-slate-700 transition-all hover:scale-110"
@@ -117,7 +127,7 @@ const Home = () => {
                 <FaGithub size={18} />
               </a>
               <a
-                href="https://www.linkedin.com/in/dineshkumar-ramaraj-b1275a228/"
+                href={ENV.LINKEDIN_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-3 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-400 hover:text-cyan-400 hover:border-cyan-500/30 transition-all hover:scale-110"
@@ -132,7 +142,7 @@ const Home = () => {
         {/* Right Avatar Card Column */}
         <div className="lg:col-span-5 flex justify-center items-center relative">
           <div className="relative w-72 sm:w-80 h-72 sm:h-80 group">
-            
+
             {/* Ambient behind image */}
             <div
               className="absolute -inset-2 rounded-3xl opacity-60 blur-xl group-hover:opacity-80 transition duration-500 animate-pulse-glow"

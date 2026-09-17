@@ -39,10 +39,10 @@ const Header = ({ showSidebar, setShowSidebar }) => {
           >
             /&gt;
           </span>
-          <span className={`hidden sm:inline-flex items-center gap-1.5 ml-2 px-2.5 py-0.5 rounded-full text-xs font-medium ${theme.badgeBg}`}>
+          {/* <span className={`hidden sm:inline-flex items-center gap-1.5 ml-2 px-2.5 py-0.5 rounded-full text-xs font-medium ${theme.badgeBg}`}>
             <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: theme.primary }}></span>
             Available
-          </span>
+          </span> */}
         </Link>
 
         {/* Desktop Nav Links */}
@@ -52,10 +52,9 @@ const Header = ({ showSidebar, setShowSidebar }) => {
               key={link.path}
               to={link.path}
               className={({ isActive }) =>
-                `px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                  isActive
-                    ? `bg-gradient-to-r ${theme.buttonGradient} text-white shadow-md shadow-slate-950/50`
-                    : "text-slate-300 hover:text-white hover:bg-slate-800/60"
+                `px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${isActive
+                  ? `bg-gradient-to-r ${theme.buttonGradient} text-white shadow-md shadow-slate-950/50`
+                  : "text-slate-300 hover:text-white hover:bg-slate-800/60"
                 }`
               }
             >

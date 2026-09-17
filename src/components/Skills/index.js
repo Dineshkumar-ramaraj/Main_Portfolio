@@ -1,19 +1,19 @@
 import React, { useState } from "react";
-import { 
-  SiHtml5, 
-  SiJavascript, 
-  SiReact, 
-  SiRedux, 
-  SiTailwindcss, 
+import {
+  SiHtml5,
+  SiJavascript,
+  SiReact,
+  SiRedux,
+  SiTailwindcss,
   SiBootstrap,
-  SiNodedotjs, 
-  SiExpress, 
-  SiMongodb, 
-  SiMysql, 
-  SiCplusplus, 
-  SiPython, 
-  SiGit, 
-  SiGithub, 
+  SiNodedotjs,
+  SiExpress,
+  SiMongodb,
+  SiMysql,
+  SiCplusplus,
+  SiPython,
+  SiGit,
+  SiGithub,
   SiPostman,
   SiNumpy,
   SiPandas,
@@ -24,15 +24,15 @@ import {
   SiStreamlit,
   SiJupyter
 } from "react-icons/si";
-import { 
-  FaJava, 
-  FaDatabase, 
-  FaCss3Alt, 
-  FaBrain, 
-  FaRobot, 
-  FaChartLine, 
-  FaChartBar, 
-  FaLaptopCode 
+import {
+  FaJava,
+  FaDatabase,
+  FaCss3Alt,
+  FaBrain,
+  FaRobot,
+  FaChartLine,
+  FaChartBar,
+  FaLaptopCode
 } from "react-icons/fa";
 import { VscVscode } from "react-icons/vsc";
 import { useTheme } from "../../context/ThemeContext";
@@ -373,11 +373,10 @@ const Skills = () => {
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
-              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-200 ${
-                activeCategory === cat.id
+              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-200 ${activeCategory === cat.id
                   ? `bg-gradient-to-r ${theme.buttonGradient} text-white shadow-md font-semibold`
                   : "text-slate-400 hover:text-slate-200 hover:bg-slate-800/50"
-              }`}
+                }`}
             >
               {cat.label}
             </button>
@@ -423,7 +422,7 @@ const Skills = () => {
                 <div className="w-full h-2 bg-slate-800 rounded-full overflow-hidden p-0.5">
                   <div
                     className="h-full rounded-full transition-all duration-700 ease-out"
-                    style={{ 
+                    style={{
                       width: `${skill.proficiency}%`,
                       background: `linear-gradient(to right, ${theme.primary}, ${theme.secondary})`
                     }}

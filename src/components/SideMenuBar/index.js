@@ -3,6 +3,7 @@ import { IoClose } from "react-icons/io5";
 import { NavLink, Link } from "react-router-dom";
 import { FaHome, FaUser, FaLaptopCode, FaFolderOpen, FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
 import ThemeSelector from "../ThemeSelector";
+import ENV from "../../config/env";
 
 const SideMenubar = ({ showSidebar, setShowSidebar }) => {
   const navItems = [
@@ -84,7 +85,7 @@ const SideMenubar = ({ showSidebar, setShowSidebar }) => {
 
           <div className="flex items-center gap-3">
             <a
-              href="https://github.com/DineshRamaraj"
+              href={ENV.GITHUB_URL || "https://github.com"}
               target="_blank"
               rel="noopener noreferrer"
               className="flex-1 py-2.5 flex items-center justify-center rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:border-slate-700 transition-colors"
@@ -93,7 +94,7 @@ const SideMenubar = ({ showSidebar, setShowSidebar }) => {
               <FaGithub size={18} />
             </a>
             <a
-              href="https://www.linkedin.com/in/dineshkumar-ramaraj-b1275a228/"
+              href={ENV.LINKEDIN_URL || "https://linkedin.com"}
               target="_blank"
               rel="noopener noreferrer"
               className="flex-1 py-2.5 flex items-center justify-center rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-cyan-400 hover:border-cyan-500/30 transition-colors"

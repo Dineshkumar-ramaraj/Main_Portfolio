@@ -11,11 +11,7 @@ import {
   FaCopy
 } from "react-icons/fa";
 import { useTheme } from "../../context/ThemeContext";
-
-
-const ACCESS_KEY = process.env.REACT_APP_WEB3FORMS_KEY;
-const EMAIL_ADDRESS = process.env.REACT_APP_EMAIL;
-const PHONE_NUMBER = process.env.REACT_APP_PHONE;
+import ENV from "../../config/env";
 
 const Contact = () => {
   const { theme } = useTheme();
@@ -38,32 +34,32 @@ const Contact = () => {
   ];
 
   const contactInfo = [
-    ...(EMAIL_ADDRESS
+    ...(ENV.EMAIL
       ? [
         {
           icon: <FaEnvelope style={{ color: theme.secondary }} size={20} />,
           label: "Email",
-          value: EMAIL_ADDRESS,
+          value: ENV.EMAIL,
           action: "copy",
-          href: `mailto:${EMAIL_ADDRESS}`,
+          href: `mailto:${ENV.EMAIL}`,
         },
       ]
       : []),
-    ...(PHONE_NUMBER
+    ...(ENV.PHONE
       ? [
         {
           icon: <FaPhoneAlt style={{ color: theme.primary }} size={18} />,
           label: "Phone / WhatsApp",
-          value: PHONE_NUMBER,
+          value: ENV.PHONE,
           action: "call",
-          href: `tel:${PHONE_NUMBER.replace(/\s+/g, "")}`,
+          href: `tel:${ENV.PHONE.replace(/\s+/g, "")}`,
         },
       ]
       : []),
     {
       icon: <FaMapMarkerAlt className="text-rose-400" size={20} />,
       label: "Location",
-      value: "India 🇮🇳",
+      value: ENV.LOCATION || "India 🇮🇳",
       action: null,
     },
   ];
@@ -88,9 +84,7 @@ const Contact = () => {
       return;
     }
 
-    console.log("Access: ", ACCESS_KEY)
-
-    if (!ACCESS_KEY) {
+    if (!ENV.WEB3FORMS_KEY || ENV.WEB3FORMS_KEY === "your_web3forms_access_key_here") {
       toast.error(
         "Web3Forms Access Key is not configured yet. Please check your .env file.",
         { duration: 5000 }
@@ -108,7 +102,7 @@ const Contact = () => {
           Accept: "application/json",
         },
         body: JSON.stringify({
-          access_key: ACCESS_KEY,
+          access_key: ENV.WEB3FORMS_KEY,
           name: formData.name,
           email: formData.email,
           subject: `Portfolio Inquiry [${formData.subject}] from ${formData.name}`,
@@ -135,8 +129,8 @@ const Contact = () => {
       }
     } catch (error) {
       toast.error(
-        EMAIL_ADDRESS
-          ? `Network error. Please try sending directly to ${EMAIL_ADDRESS}`
+        ENV.EMAIL
+          ? `Network error. Please try sending directly to ${ENV.EMAIL}`
           : "Network error. Please try again later."
       );
     } finally {
@@ -159,9 +153,9 @@ const Contact = () => {
       <div className="max-w-7xl mx-auto relative z-10 space-y-12">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className={`inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-semibold ${theme.badgeBg}`}>
+          {/* <div className={`inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-semibold ${theme.badgeBg}`}>
             Available For Freelance & Full-Time
-          </div>
+          </div> */}
           <h1 className="text-3xl sm:text-5xl font-display font-extrabold text-white tracking-tight">
             Get In <span className="gradient-text">Touch</span>
           </h1>
@@ -251,7 +245,7 @@ const Contact = () => {
                 </p>
                 <div className="flex items-center gap-3">
                   <a
-                    href="https://github.com/DineshRamaraj"
+                    href={ENV.GITHUB_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex-1 py-3 px-4 rounded-xl glass-card text-xs font-semibold text-slate-300 hover:text-white hover:border-slate-600 flex items-center justify-center gap-2 transition-all hover:scale-105"
@@ -260,7 +254,7 @@ const Contact = () => {
                     <span>GitHub</span>
                   </a>
                   <a
-                    href="https://www.linkedin.com/in/dineshkumar-ramaraj-b1275a228/"
+                    href={ENV.LINKEDIN_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex-1 py-3 px-4 rounded-xl glass-card text-xs font-semibold text-slate-300 hover:text-white flex items-center justify-center gap-2 transition-all hover:scale-105"

@@ -86,3 +86,12 @@
     radial-gradient(circle at 85% 60%, rgba(56, 189, 248, 0.10) 0%, transparent 45%),
     radial-gradient(circle at 50% 90%, rgba(168, 85, 247, 0.08) 0%, transparent 50%);
 }
+
+/* Typed.js cursor fix to prevent line breaking */
+.typed-cursor {
+  display: inline-block;
+  opacity: 1;
+  font-weight: 200;
+  margin-left: 2px;
+  vertical-align: baseline;
+}
